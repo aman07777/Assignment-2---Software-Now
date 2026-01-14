@@ -1,0 +1,2 @@
+most stable: station DARWIN-AIRPORT: StdDev 1.2C
+most variable: station WAGGA-WAGGA-AMO: StdDev 6.9C

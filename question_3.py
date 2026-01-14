@@ -27,6 +27,8 @@ Enter the recursion depth: 3 """
 
 
 import turtle
+
+#this function draws one edge using recursion
 def draw_edge(t, length, depth):
     if depth == 0:
         t.forward(length)
@@ -39,13 +41,13 @@ def draw_edge(t, length, depth):
         draw_edge(t, length, depth - 1)
         t.left(60)
         draw_edge(t, length, depth - 1)
+
+#this function draws the polygon with given sides
 def draw_polygon(t, sides, length, depth):
     angle = 360 / sides
     for _ in range(sides):
         draw_edge(t, length, depth)
         t.right(angle)
-
-
 
 def main():
     #inputs from user
@@ -57,11 +59,10 @@ def main():
     screen = turtle.Screen()
     screen.title("recursive geometric pattern")
     t = turtle.Turtle()
-    t.speed(0)  # Fastest drawing speed
-
-    # it draws the polygon with recursive pattern
+    #since 0 speed is the fastest can be adjusted accordingly(0-10)
+    t.speed(0) 
     draw_polygon(t, sides, length, depth)
-
+    #it just keeps the window open untill user closes it 
     turtle.done()
 
 if __name__ == "__main__":

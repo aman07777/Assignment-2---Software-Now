@@ -1,0 +1,1 @@
+station BOURKE-AIRPORT-AWS: range 24.4C (max: 43.0C, min: 18.5C)
