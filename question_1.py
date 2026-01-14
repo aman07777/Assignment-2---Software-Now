@@ -30,3 +30,68 @@ When run, your program should automatically:
 3. Decrypt the encrypted file 
 4. Verify the decryption matches the original """
 
+
+# it encrypts `raw_text.txt` into `encrypted_text.txt` using the two shifts
+def encrypt(shift1, shift2):
+    with open("raw_text.txt", "r") as f:
+        text = f.read()
+
+    encrypted = ""
+
+    for ch in text:
+        if 'a' <= ch <= 'm':
+            encrypted += chr((ord(ch)-97 + shift1*shift2) % 26 + 97)
+        elif 'n' <= ch <= 'z':
+            encrypted += chr((ord(ch)-97 - (shift1+shift2)) % 26 + 97)
+        elif 'A' <= ch <= 'M':
+            encrypted += chr((ord(ch)-65 - shift1) % 26 + 65)
+        elif 'N' <= ch <= 'Z':
+            encrypted += chr((ord(ch)-65 + shift2**2) % 26 + 65)
+        else:
+            encrypted += ch
+
+    with open("encrypted_text.txt", "w") as f:
+        f.write(encrypted)
+
+
+# it decrypts `encrypted_text.txt` back into `decrypted_text.txt`
+def decrypt(shift1, shift2):
+    with open("encrypted_text.txt", "r") as f:
+        text = f.read()
+
+    decrypted = ""
+
+    for ch in text:
+        if 'a' <= ch <= 'm':
+            decrypted += chr((ord(ch)-97 - shift1*shift2) % 26 + 97)
+        elif 'n' <= ch <= 'z':
+            decrypted += chr((ord(ch)-97 + (shift1+shift2)) % 26 + 97)
+        elif 'A' <= ch <= 'M':
+            decrypted += chr((ord(ch)-65 + shift1) % 26 + 65)
+        elif 'N' <= ch <= 'Z':
+            decrypted += chr((ord(ch)-65 - shift2**2) % 26 + 65)
+        else:
+            decrypted += ch
+
+    with open("decrypted_text.txt", "w") as f:
+        f.write(decrypted)
+
+# it verifies the decrypted file matches the original
+def verify():
+    with open("raw_text.txt", "r") as f:
+        original = f.read()
+    with open("decrypted_text.txt", "r") as f:
+        decrypted = f.read()
+    if original == decrypted:
+        print("Succccccccess!!!!!!! ")
+    else:
+        print("Faiiiiiiled !!!!!!!! ")
+
+
+shift1 = int(input("enter shift1 "))
+shift2 = int(input("enter shift2: "))
+
+# it simply run the simple encrypt decrypt verify flow
+encrypt(shift1, shift2)
+decrypt(shift1, shift2)
+verify()
